@@ -803,6 +803,8 @@ img, video, canvas, svg { max-width: 100%; }
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
 }
+.po-tw-set-row { cursor: pointer; transition: background 0.15s, border-color 0.15s; }
+.po-tw-set-row:hover { background: rgba(255,255,255,0.055); border-color: rgba(255,255,255,0.12); }
 .po-tw-empty {
   text-align: center; padding: 14px 0;
   font-size: 12px; color: var(--text-3); font-style: italic;
@@ -1691,6 +1693,40 @@ img, video, canvas, svg { max-width: 100%; }
   </div>
 </div>
 
+<!-- Editar / apagar set de hoje -->
+<div class="po-modal-bg" id="setEditModalBg">
+  <div class="po-modal">
+    <h3 id="setEditModalTitle">Editar set</h3>
+    <div class="po-field" id="setEditWeightField">
+      <label style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.04em;text-transform:uppercase">Peso</label>
+      <div class="po-weight-row">
+        <button class="po-w-btn" id="setEditWeightDown" type="button">−</button>
+        <input type="number" id="setEditWeight" step="0.5" inputmode="decimal">
+        <button class="po-w-btn" id="setEditWeightUp" type="button">+</button>
+      </div>
+    </div>
+    <div class="po-field">
+      <label style="font-size:11px;color:var(--text-3);font-weight:700;letter-spacing:0.04em;text-transform:uppercase">Reps</label>
+      <div class="po-reps-row" id="setEditRepsRow" data-value="8">
+        <button type="button" class="po-reps-pill" data-v="4">4</button>
+        <button type="button" class="po-reps-pill" data-v="5">5</button>
+        <button type="button" class="po-reps-pill" data-v="6">6</button>
+        <button type="button" class="po-reps-pill" data-v="7">7</button>
+        <button type="button" class="po-reps-pill" data-v="8">8</button>
+        <button type="button" class="po-reps-pill" data-v="9">9</button>
+        <button type="button" class="po-reps-pill" data-v="10">10</button>
+        <button type="button" class="po-reps-pill" data-v="11">11</button>
+        <button type="button" class="po-reps-pill" data-v="12">12</button>
+      </div>
+    </div>
+    <div class="po-modal-actions">
+      <button class="po-btn-secondary" id="setEditCancel">Cancelar</button>
+      <button class="po-btn-primary" id="setEditSave">Guardar</button>
+    </div>
+    <span class="po-delete-link" id="setEditDelete">Apagar este set</span>
+  </div>
+</div>
+
 <script>
 (function() {
   // ============================================================
@@ -2156,16 +2192,13 @@ img, video, canvas, svg { max-width: 100%; }
       empty.classList.remove('hidden');
     } else {
       empty.classList.add('hidden');
-      list.innerHTML = sum.perEx.map(e => {
-        const top = e.ex.bw
-          ? 'top ' + Math.max.apply(null, e.sets.map(s => s.reps)) + ' reps'
-          : 'top ' + Math.max.apply(null, e.sets.map(s => s.weight)) + u;
-        const meta = e.ex.bw
-          ? (e.sets.length + ' set' + (e.sets.length === 1 ? '' : 's') + ' · ' + top)
-          : (e.sets.length + ' set' + (e.sets.length === 1 ? '' : 's') + ' · ' + top + ' · ' + Math.round(e.vol) + u + ' total');
-        return '<li class="po-tw-row">'
-          + '<span class="po-tw-row-name">' + escape(e.ex.name) + '</span>'
-          + '<span class="po-tw-row-meta">' + meta + '</span>'
+      list.innerHTML = todaySets.map(({ex, log}) => {
+        const setLabel = ex.bw
+          ? log.reps + ' reps'
+          : log.weight + u + ' × ' + log.reps;
+        return '<li class="po-tw-row po-tw-set-row" data-exid="' + ex.id + '" data-date="' + log.date + '">'
+          + '<span class="po-tw-row-name">' + escape(ex.name) + '</span>'
+          + '<span class="po-tw-row-meta">' + setLabel + '</span>'
           + '</li>';
       }).join('');
     }
@@ -2230,6 +2263,101 @@ img, video, canvas, svg { max-width: 100%; }
     body.style.display = open ? 'none' : 'flex';
     body.style.flexDirection = 'column';
     toggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+
+  // ---- Editar / apagar set de hoje ----
+  let _setEditExId = null, _setEditDate = null;
+
+  function _openSetEdit(exId, date) {
+    const ex = state.exercises.find(e => e.id === exId);
+    if (!ex) return;
+    const arr = state.logs[exId] || [];
+    const log = arr.find(l => l.date === date);
+    if (!log) return;
+    _setEditExId = exId;
+    _setEditDate = date;
+    $('setEditModalTitle').textContent = ex.name;
+    const wField = $('setEditWeightField');
+    if (ex.bw) {
+      wField.style.display = 'none';
+    } else {
+      wField.style.display = '';
+      $('setEditWeight').value = log.weight;
+    }
+    const rRow = $('setEditRepsRow');
+    rRow.dataset.value = String(log.reps);
+    rRow.querySelectorAll('.po-reps-pill').forEach(b =>
+      b.classList.toggle('active', parseInt(b.dataset.v, 10) === log.reps)
+    );
+    $('setEditModalBg').classList.add('show');
+    document.body.classList.add('topbar-modal-open');
+  }
+
+  function _closeSetEdit() {
+    $('setEditModalBg').classList.remove('show');
+    document.body.classList.remove('topbar-modal-open');
+    _setEditExId = null;
+    _setEditDate = null;
+  }
+
+  $('setEditModalBg').addEventListener('click', e => {
+    if (e.target === $('setEditModalBg')) _closeSetEdit();
+  });
+  $('setEditCancel').addEventListener('click', _closeSetEdit);
+
+  $('setEditRepsRow').querySelectorAll('.po-reps-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $('setEditRepsRow').dataset.value = btn.dataset.v;
+      $('setEditRepsRow').querySelectorAll('.po-reps-pill').forEach(b =>
+        b.classList.toggle('active', b === btn)
+      );
+    });
+  });
+
+  $('setEditWeightDown').addEventListener('click', () => {
+    const inp = $('setEditWeight');
+    inp.value = Math.max(0, (parseFloat(inp.value) || 0) - 2.5);
+  });
+  $('setEditWeightUp').addEventListener('click', () => {
+    const inp = $('setEditWeight');
+    inp.value = (parseFloat(inp.value) || 0) + 2.5;
+  });
+
+  $('setEditSave').addEventListener('click', () => {
+    if (!_setEditExId || !_setEditDate) return;
+    const ex = state.exercises.find(e => e.id === _setEditExId);
+    if (!ex) return;
+    const arr = state.logs[_setEditExId] || [];
+    const idx = arr.findIndex(l => l.date === _setEditDate);
+    if (idx === -1) return;
+    const reps = parseInt($('setEditRepsRow').dataset.value, 10) || 0;
+    const weight = ex.bw ? 0 : (parseFloat($('setEditWeight').value) || 0);
+    arr[idx].reps = reps;
+    if (!ex.bw) arr[idx].weight = weight;
+    state.logs[_setEditExId] = arr;
+    saveState();
+    _closeSetEdit();
+    renderAll();
+    if (typeof wtRender === 'function') wtRender();
+  });
+
+  $('setEditDelete').addEventListener('click', () => {
+    if (!_setEditExId || !_setEditDate) return;
+    const arr = state.logs[_setEditExId] || [];
+    const idx = arr.findIndex(l => l.date === _setEditDate);
+    if (idx === -1) return;
+    arr.splice(idx, 1);
+    if (!arr.length) delete state.logs[_setEditExId];
+    else state.logs[_setEditExId] = arr;
+    saveState();
+    _closeSetEdit();
+    renderAll();
+    if (typeof wtRender === 'function') wtRender();
+  });
+
+  $('poTwList').addEventListener('click', e => {
+    const row = e.target.closest('.po-tw-set-row');
+    if (row) _openSetEdit(row.dataset.exid, row.dataset.date);
   });
 
   // ============================================================
