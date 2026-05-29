@@ -28,7 +28,7 @@
      dark background so the bar feels continuous with the page chrome. */
   background: #0a0a0b;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  font-family: 'Geist', -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
 }
 .topbar-pill {
   flex: 1 1 0; min-width: 0;
@@ -168,32 +168,32 @@ body.topbar-modal-open {
 
   // -------- HTML --------
   const html = `
-<header class="topbar" id="topbar" role="navigation" aria-label="Quick stats">
+<header class="topbar" id="topbar" role="navigation" aria-label="Estatísticas rápidas">
   <a href="index.html" class="topbar-pill" id="topbarGoals">
     <span class="topbar-pill-dot"></span>
-    <span class="topbar-pill-label">GOALS</span>
+    <span class="topbar-pill-label">OBJETIVOS</span>
     <span class="topbar-pill-count" id="topbarGoalsCount">—/—</span>
   </a>
   <a href="health.html" class="topbar-pill" id="topbarStack">
     <span class="topbar-pill-dot"></span>
-    <span class="topbar-pill-label">STACK</span>
+    <span class="topbar-pill-label">HÁBITOS</span>
     <span class="topbar-pill-count" id="topbarStackCount">—/—</span>
   </a>
   <div class="topbar-water-wrap">
     <a href="health.html#water" class="topbar-water-pill" id="topbarWater">
       <span class="topbar-pill-dot"></span>
-      <span class="topbar-pill-label">WATER</span>
+      <span class="topbar-pill-label">ÁGUA</span>
       <span class="topbar-pill-count" id="topbarWaterCount">—/—</span>
     </a>
-    <button class="topbar-water-add" id="topbarWaterAdd" aria-label="Log one drink" type="button">+</button>
+    <button class="topbar-water-add" id="topbarWaterAdd" aria-label="Registar uma bebida" type="button">+</button>
   </div>
   <a href="gym.html" class="topbar-pill" id="topbarGym">
     <span class="topbar-pill-dot"></span>
-    <span class="topbar-pill-label">GYM</span>
+    <span class="topbar-pill-label">GINÁSIO</span>
   </a>
   <a href="finance.html" class="topbar-pill" id="topbarFinance">
     <span class="topbar-pill-dot"></span>
-    <span class="topbar-pill-label">FINANCE</span>
+    <span class="topbar-pill-label">FINANÇAS</span>
   </a>
 </header>
 `;
