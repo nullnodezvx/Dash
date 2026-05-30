@@ -1,75 +1,13 @@
 /* ═══════════════════════════════════════════════════════════════
    CYBERPUNK REDESIGN v2  —  shared visual override layer
-   Space Grotesk + Space Mono · per-page accent colours · glow FX
+   Space Grotesk + Space Mono · gold accent (finanças) · glow FX
    Loaded after each page's own <style> so same-specificity rules
    here win by cascade order. Topbar uses !important (injected
    by topbar.js after this sheet loads).
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── 1. VARIABLES — default accent: cyan (goals page) ────────── */
+/* ── 1. VARIABLES — ouro (finanças) em todas as secções ───────── */
 :root {
-  --cy:             #00BFFF;
-  --cy-2:           #0080CC;
-  --cy-rgb:         0, 191, 255;
-  --cy-dim:         rgba(0, 191, 255, 0.14);
-  --cy-mid:         rgba(0, 191, 255, 0.30);
-  --cy-glow-sm:     0 0 14px rgba(0, 191, 255, 0.45);
-  --cy-glow-md:     0 0 28px rgba(0, 191, 255, 0.40), 0 0 56px rgba(0, 191, 255, 0.12);
-  --cy-glow-lg:     0 0 50px rgba(0, 191, 255, 0.45), 0 0 100px rgba(0, 191, 255, 0.14);
-  --cy-card-glow:   0 0 32px rgba(0, 191, 255, 0.06);
-  --cy-hover-glow:  0 0 60px rgba(0, 191, 255, 0.18), 0 0 120px rgba(0, 191, 255, 0.06);
-  --cy-inset:       0 0 0 1px rgba(0, 191, 255, 0.06) inset;
-  --cy-inset-h:     0 0 0 1px rgba(0, 191, 255, 0.14) inset;
-  --cy-bg:          #07070F;
-  --cy-bg-card:     rgba(0, 8, 22, 0.72);
-  --cy-border:      rgba(0, 191, 255, 0.14);
-  --cy-border-h:    rgba(0, 191, 255, 0.42);
-  --font:           'Space Grotesk', -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
-  --font-mono:      'Space Mono', ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-}
-
-/* ── Health page — neon green ─────────────────────────────────── */
-body[data-page="health"] {
-  --cy:             #00FF88;
-  --cy-2:           #00C060;
-  --cy-rgb:         0, 255, 136;
-  --cy-dim:         rgba(0, 255, 136, 0.14);
-  --cy-mid:         rgba(0, 255, 136, 0.30);
-  --cy-glow-sm:     0 0 14px rgba(0, 255, 136, 0.45);
-  --cy-glow-md:     0 0 28px rgba(0, 255, 136, 0.40), 0 0 56px rgba(0, 255, 136, 0.12);
-  --cy-glow-lg:     0 0 50px rgba(0, 255, 136, 0.45), 0 0 100px rgba(0, 255, 136, 0.14);
-  --cy-card-glow:   0 0 32px rgba(0, 255, 136, 0.06);
-  --cy-hover-glow:  0 0 60px rgba(0, 255, 136, 0.18), 0 0 120px rgba(0, 255, 136, 0.06);
-  --cy-inset:       0 0 0 1px rgba(0, 255, 136, 0.06) inset;
-  --cy-inset-h:     0 0 0 1px rgba(0, 255, 136, 0.14) inset;
-  --cy-bg:          #060F08;
-  --cy-bg-card:     rgba(0, 22, 10, 0.72);
-  --cy-border:      rgba(0, 255, 136, 0.14);
-  --cy-border-h:    rgba(0, 255, 136, 0.42);
-}
-
-/* ── Gym page — neon orange ───────────────────────────────────── */
-body[data-page="gym"] {
-  --cy:             #FF6B00;
-  --cy-2:           #CC4400;
-  --cy-rgb:         255, 107, 0;
-  --cy-dim:         rgba(255, 107, 0, 0.14);
-  --cy-mid:         rgba(255, 107, 0, 0.30);
-  --cy-glow-sm:     0 0 14px rgba(255, 107, 0, 0.45);
-  --cy-glow-md:     0 0 28px rgba(255, 107, 0, 0.40), 0 0 56px rgba(255, 107, 0, 0.12);
-  --cy-glow-lg:     0 0 50px rgba(255, 107, 0, 0.45), 0 0 100px rgba(255, 107, 0, 0.14);
-  --cy-card-glow:   0 0 32px rgba(255, 107, 0, 0.06);
-  --cy-hover-glow:  0 0 60px rgba(255, 107, 0, 0.18), 0 0 120px rgba(255, 107, 0, 0.06);
-  --cy-inset:       0 0 0 1px rgba(255, 107, 0, 0.06) inset;
-  --cy-inset-h:     0 0 0 1px rgba(255, 107, 0, 0.14) inset;
-  --cy-bg:          #0F0800;
-  --cy-bg-card:     rgba(22, 8, 0, 0.72);
-  --cy-border:      rgba(255, 107, 0, 0.14);
-  --cy-border-h:    rgba(255, 107, 0, 0.42);
-}
-
-/* ── Finance page — gold ──────────────────────────────────────── */
-body[data-page="finance"] {
   --cy:             #FFD700;
   --cy-2:           #CC9900;
   --cy-rgb:         255, 215, 0;
@@ -86,26 +24,8 @@ body[data-page="finance"] {
   --cy-bg-card:     rgba(22, 18, 0, 0.72);
   --cy-border:      rgba(255, 215, 0, 0.14);
   --cy-border-h:    rgba(255, 215, 0, 0.42);
-}
-
-/* ── Water page — aqua ────────────────────────────────────────── */
-body[data-page="water"] {
-  --cy:             #00E5FF;
-  --cy-2:           #0099BB;
-  --cy-rgb:         0, 229, 255;
-  --cy-dim:         rgba(0, 229, 255, 0.14);
-  --cy-mid:         rgba(0, 229, 255, 0.30);
-  --cy-glow-sm:     0 0 14px rgba(0, 229, 255, 0.45);
-  --cy-glow-md:     0 0 28px rgba(0, 229, 255, 0.40), 0 0 56px rgba(0, 229, 255, 0.12);
-  --cy-glow-lg:     0 0 50px rgba(0, 229, 255, 0.45), 0 0 100px rgba(0, 229, 255, 0.14);
-  --cy-card-glow:   0 0 32px rgba(0, 229, 255, 0.06);
-  --cy-hover-glow:  0 0 60px rgba(0, 229, 255, 0.18), 0 0 120px rgba(0, 229, 255, 0.06);
-  --cy-inset:       0 0 0 1px rgba(0, 229, 255, 0.06) inset;
-  --cy-inset-h:     0 0 0 1px rgba(0, 229, 255, 0.14) inset;
-  --cy-bg:          #00060F;
-  --cy-bg-card:     rgba(0, 10, 24, 0.72);
-  --cy-border:      rgba(0, 229, 255, 0.14);
-  --cy-border-h:    rgba(0, 229, 255, 0.42);
+  --font:           'Space Grotesk', -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  --font-mono:      'Space Mono', ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
 /* ── 2. BASE BACKGROUND ───────────────────────────────────────── */
