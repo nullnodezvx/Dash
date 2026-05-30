@@ -24,8 +24,8 @@
   --cy-bg-card:     rgba(22, 18, 0, 0.72);
   --cy-border:      rgba(255, 215, 0, 0.14);
   --cy-border-h:    rgba(255, 215, 0, 0.42);
-  --font:           "adobe-caslon-pro", "Adobe Caslon Pro", "Caslon", Georgia, serif;
-  --font-mono:      "adobe-caslon-pro", "Adobe Caslon Pro", "Caslon", Georgia, serif;
+  --font:           'Montserrat', -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  --font-mono:      'Montserrat', ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
 /* ── 2. BASE BACKGROUND ───────────────────────────────────────── */

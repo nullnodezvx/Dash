@@ -18,7 +18,9 @@ Contact: rowan.wisere@gmail.com
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0a0a0b">
 <title>Água</title>
-<!-- Adobe Fonts (Typekit) — adiciona o teu kit: <link rel="stylesheet" href="https://use.typekit.net/SEU-KIT-ID.css"> -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="sync.js" defer></script>
 <script src="topbar.js" defer></script>
@@ -73,8 +75,8 @@ const CONFIG = {
   --warn: #fbbf24;
   --bad: #ff8a8a;
   --info: #7DD3FC;
-  --font: "adobe-caslon-pro", "Adobe Caslon Pro", "Caslon", Georgia, serif;
-  --font-mono: "adobe-caslon-pro", "Adobe Caslon Pro", "Caslon", Georgia, serif;
+  --font: 'Montserrat', -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  --font-mono: 'Montserrat', ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 * { box-sizing: border-box; }
 html, body {
