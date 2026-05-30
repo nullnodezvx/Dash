@@ -1,90 +1,215 @@
 /* ═══════════════════════════════════════════════════════════════
-   CYBERPUNK REDESIGN  —  shared visual override layer
-   Loaded after each page's own <style> block so same-specificity
-   rules here win by cascade order.
-   Topbar overrides use !important (topbar.js injects its CSS after
-   this sheet loads, so it would otherwise win without !important).
+   CYBERPUNK REDESIGN v2  —  shared visual override layer
+   Space Grotesk + Space Mono · per-page accent colours · glow FX
+   Loaded after each page's own <style> so same-specificity rules
+   here win by cascade order. Topbar uses !important (injected
+   by topbar.js after this sheet loads).
    ═══════════════════════════════════════════════════════════════ */
 
-/* ── Variables ────────────────────────────────────────────────── */
+/* ── 1. VARIABLES — default accent: cyan (goals page) ────────── */
 :root {
-  --cy:          #00BFFF;
-  --cy-2:        #0080CC;
-  --cy-dim:      rgba(0, 191, 255, 0.14);
-  --cy-mid:      rgba(0, 191, 255, 0.30);
-  --cy-glow-sm:  0 0 14px rgba(0, 191, 255, 0.45);
-  --cy-glow-md:  0 0 28px rgba(0, 191, 255, 0.40), 0 0 56px rgba(0, 191, 255, 0.12);
-  --cy-glow-lg:  0 0 50px rgba(0, 191, 255, 0.45), 0 0 100px rgba(0, 191, 255, 0.14);
-  --cy-bg:       #080810;
-  --cy-bg-card:  rgba(0, 10, 28, 0.70);
-  --cy-border:   rgba(0, 191, 255, 0.14);
-  --cy-border-h: rgba(0, 191, 255, 0.42);
+  --cy:             #00BFFF;
+  --cy-2:           #0080CC;
+  --cy-rgb:         0, 191, 255;
+  --cy-dim:         rgba(0, 191, 255, 0.14);
+  --cy-mid:         rgba(0, 191, 255, 0.30);
+  --cy-glow-sm:     0 0 14px rgba(0, 191, 255, 0.45);
+  --cy-glow-md:     0 0 28px rgba(0, 191, 255, 0.40), 0 0 56px rgba(0, 191, 255, 0.12);
+  --cy-glow-lg:     0 0 50px rgba(0, 191, 255, 0.45), 0 0 100px rgba(0, 191, 255, 0.14);
+  --cy-card-glow:   0 0 32px rgba(0, 191, 255, 0.06);
+  --cy-hover-glow:  0 0 60px rgba(0, 191, 255, 0.18), 0 0 120px rgba(0, 191, 255, 0.06);
+  --cy-inset:       0 0 0 1px rgba(0, 191, 255, 0.06) inset;
+  --cy-inset-h:     0 0 0 1px rgba(0, 191, 255, 0.14) inset;
+  --cy-bg:          #07070F;
+  --cy-bg-card:     rgba(0, 8, 22, 0.72);
+  --cy-border:      rgba(0, 191, 255, 0.14);
+  --cy-border-h:    rgba(0, 191, 255, 0.42);
+  --font:           'Space Grotesk', -apple-system, BlinkMacSystemFont, "Inter", sans-serif;
+  --font-mono:      'Space Mono', ui-monospace, "SF Mono", Menlo, Consolas, monospace;
 }
 
-/* ── Base background ───────────────────────────────────────────── */
+/* ── Health page — neon green ─────────────────────────────────── */
+body[data-page="health"] {
+  --cy:             #00FF88;
+  --cy-2:           #00C060;
+  --cy-rgb:         0, 255, 136;
+  --cy-dim:         rgba(0, 255, 136, 0.14);
+  --cy-mid:         rgba(0, 255, 136, 0.30);
+  --cy-glow-sm:     0 0 14px rgba(0, 255, 136, 0.45);
+  --cy-glow-md:     0 0 28px rgba(0, 255, 136, 0.40), 0 0 56px rgba(0, 255, 136, 0.12);
+  --cy-glow-lg:     0 0 50px rgba(0, 255, 136, 0.45), 0 0 100px rgba(0, 255, 136, 0.14);
+  --cy-card-glow:   0 0 32px rgba(0, 255, 136, 0.06);
+  --cy-hover-glow:  0 0 60px rgba(0, 255, 136, 0.18), 0 0 120px rgba(0, 255, 136, 0.06);
+  --cy-inset:       0 0 0 1px rgba(0, 255, 136, 0.06) inset;
+  --cy-inset-h:     0 0 0 1px rgba(0, 255, 136, 0.14) inset;
+  --cy-bg:          #060F08;
+  --cy-bg-card:     rgba(0, 22, 10, 0.72);
+  --cy-border:      rgba(0, 255, 136, 0.14);
+  --cy-border-h:    rgba(0, 255, 136, 0.42);
+}
+
+/* ── Gym page — neon orange ───────────────────────────────────── */
+body[data-page="gym"] {
+  --cy:             #FF6B00;
+  --cy-2:           #CC4400;
+  --cy-rgb:         255, 107, 0;
+  --cy-dim:         rgba(255, 107, 0, 0.14);
+  --cy-mid:         rgba(255, 107, 0, 0.30);
+  --cy-glow-sm:     0 0 14px rgba(255, 107, 0, 0.45);
+  --cy-glow-md:     0 0 28px rgba(255, 107, 0, 0.40), 0 0 56px rgba(255, 107, 0, 0.12);
+  --cy-glow-lg:     0 0 50px rgba(255, 107, 0, 0.45), 0 0 100px rgba(255, 107, 0, 0.14);
+  --cy-card-glow:   0 0 32px rgba(255, 107, 0, 0.06);
+  --cy-hover-glow:  0 0 60px rgba(255, 107, 0, 0.18), 0 0 120px rgba(255, 107, 0, 0.06);
+  --cy-inset:       0 0 0 1px rgba(255, 107, 0, 0.06) inset;
+  --cy-inset-h:     0 0 0 1px rgba(255, 107, 0, 0.14) inset;
+  --cy-bg:          #0F0800;
+  --cy-bg-card:     rgba(22, 8, 0, 0.72);
+  --cy-border:      rgba(255, 107, 0, 0.14);
+  --cy-border-h:    rgba(255, 107, 0, 0.42);
+}
+
+/* ── Finance page — gold ──────────────────────────────────────── */
+body[data-page="finance"] {
+  --cy:             #FFD700;
+  --cy-2:           #CC9900;
+  --cy-rgb:         255, 215, 0;
+  --cy-dim:         rgba(255, 215, 0, 0.14);
+  --cy-mid:         rgba(255, 215, 0, 0.30);
+  --cy-glow-sm:     0 0 14px rgba(255, 215, 0, 0.45);
+  --cy-glow-md:     0 0 28px rgba(255, 215, 0, 0.40), 0 0 56px rgba(255, 215, 0, 0.12);
+  --cy-glow-lg:     0 0 50px rgba(255, 215, 0, 0.45), 0 0 100px rgba(255, 215, 0, 0.14);
+  --cy-card-glow:   0 0 32px rgba(255, 215, 0, 0.06);
+  --cy-hover-glow:  0 0 60px rgba(255, 215, 0, 0.18), 0 0 120px rgba(255, 215, 0, 0.06);
+  --cy-inset:       0 0 0 1px rgba(255, 215, 0, 0.06) inset;
+  --cy-inset-h:     0 0 0 1px rgba(255, 215, 0, 0.14) inset;
+  --cy-bg:          #0C0A00;
+  --cy-bg-card:     rgba(22, 18, 0, 0.72);
+  --cy-border:      rgba(255, 215, 0, 0.14);
+  --cy-border-h:    rgba(255, 215, 0, 0.42);
+}
+
+/* ── Water page — aqua ────────────────────────────────────────── */
+body[data-page="water"] {
+  --cy:             #00E5FF;
+  --cy-2:           #0099BB;
+  --cy-rgb:         0, 229, 255;
+  --cy-dim:         rgba(0, 229, 255, 0.14);
+  --cy-mid:         rgba(0, 229, 255, 0.30);
+  --cy-glow-sm:     0 0 14px rgba(0, 229, 255, 0.45);
+  --cy-glow-md:     0 0 28px rgba(0, 229, 255, 0.40), 0 0 56px rgba(0, 229, 255, 0.12);
+  --cy-glow-lg:     0 0 50px rgba(0, 229, 255, 0.45), 0 0 100px rgba(0, 229, 255, 0.14);
+  --cy-card-glow:   0 0 32px rgba(0, 229, 255, 0.06);
+  --cy-hover-glow:  0 0 60px rgba(0, 229, 255, 0.18), 0 0 120px rgba(0, 229, 255, 0.06);
+  --cy-inset:       0 0 0 1px rgba(0, 229, 255, 0.06) inset;
+  --cy-inset-h:     0 0 0 1px rgba(0, 229, 255, 0.14) inset;
+  --cy-bg:          #00060F;
+  --cy-bg-card:     rgba(0, 10, 24, 0.72);
+  --cy-border:      rgba(0, 229, 255, 0.14);
+  --cy-border-h:    rgba(0, 229, 255, 0.42);
+}
+
+/* ── 2. BASE BACKGROUND ───────────────────────────────────────── */
 html, body { background: var(--cy-bg) !important; }
 
 body::before {
   background:
-    radial-gradient(ellipse 90% 55% at 5% -5%,   rgba(0, 100, 200, 0.20) 0%, transparent 55%),
-    radial-gradient(ellipse 70% 45% at 95% 105%,  rgba(0,  40, 120, 0.15) 0%, transparent 55%),
-    radial-gradient(ellipse 55% 35% at 50%  50%,  rgba(0,  60, 160, 0.07) 0%, transparent 65%) !important;
+    radial-gradient(ellipse 90% 55% at 5%  -5%,  rgba(var(--cy-rgb), 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 45% at 95% 105%, rgba(var(--cy-rgb), 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 55% 35% at 50%  50%, rgba(var(--cy-rgb), 0.05) 0%, transparent 65%) !important;
   animation: none !important;
   filter: none !important;
 }
 
-/* Noise grain overlay — replaces the dot-grid */
+/* Scanline overlay — subtle CRT horizontal lines */
 body::after {
   content: '' !important;
   position: fixed !important;
   inset: 0 !important;
   pointer-events: none !important;
-  z-index: -1 !important;
-  background-image:
-    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") !important;
-  background-size: 200px 200px !important;
+  z-index: 9998 !important;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0px,
+      transparent 3px,
+      rgba(0, 0, 0, 0.022) 3px,
+      rgba(0, 0, 0, 0.022) 4px
+    ) !important;
   background-color: transparent !important;
-  opacity: 0.030 !important;
+  opacity: 1 !important;
 }
 
-/* ── Keyframes ─────────────────────────────────────────────────── */
+/* ── 3. KEYFRAMES ─────────────────────────────────────────────── */
 @keyframes cy-in {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(22px) scale(0.97); filter: blur(5px); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0);   }
+}
+@keyframes cy-in-x {
+  from { opacity: 0; transform: translateX(-18px); }
+  to   { opacity: 1; transform: translateX(0);     }
 }
 @keyframes cy-glow-pulse {
   0%, 100% { box-shadow: var(--cy-glow-sm); }
   50%       { box-shadow: var(--cy-glow-md); }
 }
+@keyframes cy-border-pulse {
+  0%, 100% { border-color: var(--cy-border);   }
+  50%       { border-color: var(--cy-border-h); }
+}
 @keyframes cy-num-reveal {
-  from { opacity: 0; transform: translateY(10px) scale(0.92); }
-  to   { opacity: 1; transform: translateY(0)   scale(1);    }
+  from { opacity: 0; transform: translateY(14px) scale(0.85); filter: blur(8px); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);    filter: blur(0);   }
 }
 @keyframes cy-draw {
   from { stroke-dashoffset: 2000; }
   to   { stroke-dashoffset: 0;    }
 }
+@keyframes cy-shimmer {
+  from { transform: translateX(-100%) skewX(-15deg); }
+  to   { transform: translateX(300%)  skewX(-15deg); }
+}
+@keyframes cy-glitch {
+  0%,  86%, 100% { transform: translate(0, 0);       opacity: 1;    }
+  87%             { transform: translate(-3px,  1px); opacity: 0.90; }
+  89%             { transform: translate( 3px, -1px); opacity: 0.95; }
+  91%             { transform: translate(-2px,  0px); opacity: 0.88; }
+  93%             { transform: translate( 0px,  2px); opacity: 1;    }
+  95%             { transform: translate(-1px, -1px); opacity: 0.92; }
+}
+@keyframes cy-float {
+  0%, 100% { transform: translateY(0);   }
+  50%       { transform: translateY(-5px); }
+}
+@keyframes cy-flicker {
+  0%,  100% { opacity: 1;    transform: scale(1);    }
+  45%        { opacity: 0.40; transform: scale(0.80); }
+  55%        { opacity: 1;    transform: scale(1.10); }
+}
+@keyframes cy-scan {
+  0%   { top: -4%; }
+  100% { top: 104%; }
+}
 
-/* ── Page-load stagger ─────────────────────────────────────────── */
-.ticker-row             { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .05s both; }
-.day-ring-wrap          { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .15s both; }
-.section                { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .22s both; }
-.stack-card             { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .10s both; }
-.wt-section             { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .08s both; }
-.po-header              { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .03s both; }
-.po-filters             { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .10s both; }
-.finance-ticker         { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .04s both; }
-.shell > .section:nth-child(1) { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .06s both; }
-.shell > .section:nth-child(2) { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .14s both; }
-.shell > .section:nth-child(3) { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .22s both; }
-.shell > .section:nth-child(4) { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .30s both; }
-.shell > *:nth-child(1)        { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .06s both; }
-.shell > *:nth-child(2)        { animation: cy-in .55s cubic-bezier(.22,1,.36,1) .14s both; }
+/* ── 4. PAGE-LOAD STAGGER ─────────────────────────────────────── */
+.ticker-row             { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .05s both; }
+.day-ring-wrap          { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .15s both; }
+.section                { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .22s both; }
+.stack-card             { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .10s both; }
+.wt-section             { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .08s both; }
+.po-header              { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .03s both; }
+.po-filters             { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .10s both; }
+.finance-ticker         { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .04s both; }
+.shell > .section:nth-child(1) { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .06s both; }
+.shell > .section:nth-child(2) { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .14s both; }
+.shell > .section:nth-child(3) { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .22s both; }
+.shell > .section:nth-child(4) { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .30s both; }
+.shell > *:nth-child(1)        { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .06s both; }
+.shell > *:nth-child(2)        { animation: cy-in .60s cubic-bezier(.22,1,.36,1) .14s both; }
 
 /* Number reveal */
 .gm-progress-num, .water-num, .wt-num, .po-tw-summary-num, .po-stat-val,
 .wish-hero-num, .nw-donut-num, .day-ring-percent {
-  animation: cy-num-reveal .65s cubic-bezier(.22,1,.36,1) .3s both;
+  animation: cy-num-reveal .72s cubic-bezier(.22,1,.36,1) .38s both;
 }
 
 /* Chart draw-on */
@@ -94,7 +219,23 @@ body::after {
   animation: cy-draw 1.4s ease-out .5s both;
 }
 
-/* ── Typography ────────────────────────────────────────────────── */
+/* ── 5. TYPOGRAPHY — Space Grotesk + Space Mono ───────────────── */
+html, body, button, input, select, textarea {
+  font-family: var(--font) !important;
+}
+
+/* Monospace zones: labels, numbers, tickers */
+.goal-ticker-label, .goal-ticker-row, .goal-ticker-meta,
+.day-ring-phase, .day-ring-clock, .day-ring-remaining, .day-ring-hours,
+.gm-progress-total, .gm-tomorrow-count, .gm-streak-num,
+.water-num, .wt-num, .po-tw-summary-num, .po-stat-val, .nw-donut-num,
+.ticker-tag, .topbar-pill-label, .topbar-pill-count,
+.gm-push-btn, .gm-show-toggle,
+[class*="font-mono"], code, pre {
+  font-family: var(--font-mono) !important;
+}
+
+/* Title — gradient text + glitch */
 .dash-title, .po-title, .title {
   background: linear-gradient(130deg, #ffffff 0%, var(--cy) 100%);
   -webkit-background-clip: text;
@@ -102,8 +243,11 @@ body::after {
   -webkit-text-fill-color: transparent;
   color: transparent;
   letter-spacing: -0.03em;
+  display: inline-block;
+  animation: cy-glitch 9s ease-in-out infinite;
 }
 
+/* Section labels */
 .section-title, .wt-divider span, .water-label, .po-sub-title,
 .sf-eyebrow, .gm-eyebrow, .label, .wt-comp-label, .wt-locked-label,
 .po-stat-label, .nw-chart-label, .nw-stat-label, .ord-section-label,
@@ -113,13 +257,26 @@ body::after {
 .ord-deduct-chooser-title {
   color: var(--cy);
   letter-spacing: 0.22em;
+  font-family: var(--font-mono) !important;
+}
+
+/* Section title decorative lines */
+.section-title::before {
+  background: var(--cy) !important;
+  opacity: 0.65 !important;
+  width: 20px !important;
+  height: 2px !important;
+}
+.section-title::after {
+  background: linear-gradient(90deg, var(--cy-border), transparent) !important;
+  height: 1px !important;
 }
 
 .wt-divider::before, .wt-divider::after {
-  background: rgba(0, 191, 255, 0.28);
+  background: rgba(var(--cy-rgb), 0.28);
 }
 
-/* ── Cards — glassmorphism ─────────────────────────────────────── */
+/* ── 6. CARDS — glassmorphism + layered glow ──────────────────── */
 .gm-card, .card, .stack-card, .wt-card, .po-tw, .po-rx-card,
 .po-stat-box, .day-ring-wrap, .goal-ticker, .nw-subcard,
 .nw-chart-wrap, .nw-donut-wrap, .nw-activity, .ord-add-card,
@@ -127,91 +284,109 @@ body::after {
 .nw-activity-row, .po-set-row {
   background: var(--cy-bg-card);
   border: 1px solid var(--cy-border);
-  backdrop-filter: blur(22px) saturate(1.5);
-  -webkit-backdrop-filter: blur(22px) saturate(1.5);
+  backdrop-filter: blur(24px) saturate(1.6) brightness(1.05);
+  -webkit-backdrop-filter: blur(24px) saturate(1.6) brightness(1.05);
   box-shadow:
-    0 0 0 1px rgba(0, 191, 255, 0.05) inset,
-    0 20px 60px rgba(0, 0, 0, 0.75),
-    0 0 30px rgba(0, 191, 255, 0.04);
+    var(--cy-inset),
+    0 0 0 1px rgba(255, 255, 255, 0.04) inset,
+    0 1px 0 rgba(255, 255, 255, 0.07) inset,
+    0 20px 60px rgba(0, 0, 0, 0.80),
+    var(--cy-card-glow);
   border-radius: 20px;
   transition:
-    transform      .30s cubic-bezier(.22,1,.36,1),
-    box-shadow     .30s ease,
-    border-color   .30s ease;
+    transform      .35s cubic-bezier(.22,1,.36,1),
+    box-shadow     .35s ease,
+    border-color   .35s ease;
 }
 
 .gm-card:hover, .card:hover, .stack-card:hover, .wt-card:hover,
 .po-stat-box:hover, .day-ring-wrap:hover, .po-rx-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: var(--cy-border-h);
   box-shadow:
-    0 0 0 1px rgba(0, 191, 255, 0.10) inset,
-    0 26px 72px rgba(0, 0, 0, 0.82),
-    0 0 55px rgba(0, 191, 255, 0.16);
+    var(--cy-inset-h),
+    0 0 0 1px rgba(255, 255, 255, 0.07) inset,
+    0 1px 0 rgba(255, 255, 255, 0.10) inset,
+    0 26px 72px rgba(0, 0, 0, 0.90),
+    var(--cy-hover-glow);
 }
 
+/* All-done state: animated glowing border */
 .gm-card.gm-all-done {
-  border-color: rgba(0, 191, 255, 0.28);
+  border-color: rgba(var(--cy-rgb), 0.30);
   box-shadow:
-    0 0 0 1px rgba(0, 191, 255, 0.12) inset,
-    0 20px 60px rgba(0, 0, 0, 0.75),
-    0 0 55px rgba(0, 191, 255, 0.14);
+    0 0 0 1px rgba(var(--cy-rgb), 0.14) inset,
+    0 20px 60px rgba(0, 0, 0, 0.80),
+    0 0 60px rgba(var(--cy-rgb), 0.16),
+    0 0 120px rgba(var(--cy-rgb), 0.06);
+  animation: cy-border-pulse 2.8s ease-in-out infinite;
 }
 
-/* ── Buttons — primary (electric blue) ────────────────────────── */
+/* ── 7. BUTTONS — primary ─────────────────────────────────────── */
 .gm-add, .po-btn-primary, .wt-save-btn, .wt-overlay-primary,
 .ord-add-btn, .wish-add-btn, .stack-add-btn, .quick-add-btn,
 .po-tw-done-btn:not(.is-done) {
   background: linear-gradient(135deg, var(--cy-2) 0%, var(--cy) 100%);
   color: #000;
   border: none;
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.50), 0 4px 16px rgba(0, 0, 0, 0.55);
+  box-shadow:
+    0 0 20px rgba(var(--cy-rgb), 0.50),
+    0 0 40px rgba(var(--cy-rgb), 0.15),
+    0 4px 16px rgba(0, 0, 0, 0.55);
   font-weight: 700;
   border-radius: 12px;
-  transition: box-shadow .2s, transform .15s;
+  font-family: var(--font) !important;
+  transition: box-shadow .22s, transform .15s;
 }
 .gm-add:hover, .po-btn-primary:hover, .wt-save-btn:hover,
 .wt-overlay-primary:hover, .ord-add-btn:hover, .wish-add-btn:hover,
 .stack-add-btn:hover, .quick-add-btn:hover,
 .po-tw-done-btn:not(.is-done):hover {
-  box-shadow: 0 0 35px rgba(0, 191, 255, 0.75), 0 6px 22px rgba(0, 0, 0, 0.60);
+  box-shadow:
+    0 0 36px rgba(var(--cy-rgb), 0.78),
+    0 0 70px rgba(var(--cy-rgb), 0.22),
+    0 6px 22px rgba(0, 0, 0, 0.60);
   transform: translateY(-2px);
 }
 .gm-add:active, .po-btn-primary:active { transform: translateY(0) scale(0.97); }
 
 /* Done state */
 .po-tw-done-btn.is-done {
-  background: rgba(0, 191, 255, 0.16);
+  background: rgba(var(--cy-rgb), 0.16);
   color: var(--cy);
-  border: 1px solid rgba(0, 191, 255, 0.30);
+  border: 1px solid rgba(var(--cy-rgb), 0.30);
   box-shadow: none;
 }
 
-/* ── Buttons — secondary ───────────────────────────────────────── */
+/* ── 8. BUTTONS — secondary ───────────────────────────────────── */
 .gm-polish, .po-btn-secondary, .wt-overlay-secondary, .btn-secondary {
-  background: rgba(0, 191, 255, 0.07);
-  border: 1px solid rgba(0, 191, 255, 0.24);
+  background: rgba(var(--cy-rgb), 0.07);
+  border: 1px solid rgba(var(--cy-rgb), 0.24);
   color: var(--cy);
   border-radius: 12px;
+  font-family: var(--font) !important;
   transition: background .2s, box-shadow .2s, transform .15s;
 }
 .gm-polish:hover, .po-btn-secondary:hover,
 .wt-overlay-secondary:hover, .btn-secondary:hover {
-  background: rgba(0, 191, 255, 0.13);
-  box-shadow: 0 0 18px rgba(0, 191, 255, 0.22);
+  background: rgba(var(--cy-rgb), 0.14);
+  box-shadow:
+    0 0 20px rgba(var(--cy-rgb), 0.24),
+    0 0 40px rgba(var(--cy-rgb), 0.08);
   transform: translateY(-1px);
 }
 
-/* ── Inputs ────────────────────────────────────────────────────── */
+/* ── 9. INPUTS ────────────────────────────────────────────────── */
 .gm-input, .stack-input, .wt-input, .search-input,
 .po-field input[type="number"], .po-field input[type="text"],
 .po-ex-select, .quick-add input, .ord-input, .wish-input,
 .field input, .rot-row input, .po-set-row input {
-  background: rgba(0, 5, 18, 0.78);
-  border: 1px solid rgba(0, 191, 255, 0.16);
+  background: rgba(0, 2, 12, 0.80);
+  border: 1px solid rgba(var(--cy-rgb), 0.16);
   color: #fff;
   border-radius: 12px;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.45);
+  font-family: var(--font) !important;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.50);
   transition: border-color .2s, box-shadow .2s;
 }
 .gm-input:focus, .stack-input:focus, .wt-input:focus, .search-input:focus,
@@ -219,265 +394,285 @@ body::after {
 .wish-input:focus, .po-ex-select:focus, .field input:focus {
   border-color: var(--cy);
   box-shadow:
-    inset 0 2px 8px rgba(0, 0, 0, 0.45),
-    0 0 0 3px rgba(0, 191, 255, 0.13),
-    0 0 20px rgba(0, 191, 255, 0.16);
+    inset 0 2px 10px rgba(0, 0, 0, 0.50),
+    0 0 0 3px rgba(var(--cy-rgb), 0.14),
+    0 0 24px rgba(var(--cy-rgb), 0.18);
   outline: none;
 }
 
 select, .ord-input-ccy, .ord-input-from, .wish-input-ccy,
 .date-field, input[type="date"] {
-  background: rgba(0, 5, 18, 0.78);
-  border-color: rgba(0, 191, 255, 0.16);
+  background: rgba(0, 2, 12, 0.80);
+  border-color: rgba(var(--cy-rgb), 0.16);
   color: #fff;
   border-radius: 10px;
+  font-family: var(--font) !important;
 }
-.date-field { border: 1px solid rgba(0, 191, 255, 0.16); }
+.date-field { border: 1px solid rgba(var(--cy-rgb), 0.16); }
 
-/* ── Checkboxes / toggles ──────────────────────────────────────── */
+/* ── 10. CHECKBOXES / TOGGLES ─────────────────────────────────── */
 .gm-check:checked {
   background: var(--cy);
   border-color: var(--cy);
-  box-shadow: 0 0 18px rgba(0, 191, 255, 0.65);
+  box-shadow: 0 0 20px rgba(var(--cy-rgb), 0.70);
 }
 .gm-check:checked::after { border-color: #000; }
 
 .stack-check.checked {
   background: var(--cy);
   border-color: var(--cy);
-  box-shadow: 0 0 16px rgba(0, 191, 255, 0.60);
+  box-shadow: 0 0 18px rgba(var(--cy-rgb), 0.65);
 }
 
 .sub-auto-toggle input:checked ~ .sub-auto-track { background: var(--cy); }
 .sub-auto-toggle input:checked ~ .sub-auto-label  { color: var(--cy); }
 
-/* ── Progress / bars ───────────────────────────────────────────── */
+/* ── 11. PROGRESS / BARS ──────────────────────────────────────── */
 .gm-bar-seg-done {
   background: var(--cy);
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.65);
+  box-shadow: 0 0 14px rgba(var(--cy-rgb), 0.70);
 }
 .water-bar-fill {
   background: linear-gradient(90deg, var(--cy-2), var(--cy));
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.48);
+  box-shadow: 0 0 22px rgba(var(--cy-rgb), 0.52);
 }
 .hist-bar-fill { background: linear-gradient(90deg, var(--cy-2), var(--cy)); }
 .wish-hero-bar-fill {
   background: linear-gradient(90deg, var(--cy-2), var(--cy));
-  box-shadow: 0 0 16px rgba(0, 191, 255, 0.52);
+  box-shadow: 0 0 18px rgba(var(--cy-rgb), 0.55);
 }
 
-/* ── Streaks / badges ──────────────────────────────────────────── */
+/* ── 12. STREAKS / BADGES ─────────────────────────────────────── */
 .gm-streak.gm-streak-active {
-  background: rgba(0, 191, 255, 0.11);
+  background: rgba(var(--cy-rgb), 0.11);
   color: var(--cy);
-  border-color: rgba(0, 191, 255, 0.36);
-  box-shadow: 0 0 20px rgba(0, 191, 255, 0.16);
+  border-color: rgba(var(--cy-rgb), 0.36);
+  box-shadow:
+    0 0 22px rgba(var(--cy-rgb), 0.18),
+    0 0 44px rgba(var(--cy-rgb), 0.06);
 }
 .gm-streak.gm-streak-active .gm-streak-icon {
-  filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.85));
+  filter: drop-shadow(0 0 8px rgba(var(--cy-rgb), 0.90));
 }
 
-/* ── Goal / list rows ──────────────────────────────────────────── */
+/* ── 13. GOAL / LIST ROWS ─────────────────────────────────────── */
 .gm-row {
-  background: rgba(0, 5, 18, 0.52);
-  border-color: rgba(0, 191, 255, 0.08);
+  background: rgba(0, 2, 14, 0.52);
+  border-color: rgba(var(--cy-rgb), 0.08);
   border-radius: 14px;
 }
 .gm-row:hover {
-  background: rgba(0, 191, 255, 0.055);
-  border-color: rgba(0, 191, 255, 0.20);
+  background: rgba(var(--cy-rgb), 0.055);
+  border-color: rgba(var(--cy-rgb), 0.20);
 }
 .gm-row.gm-row-queued {
-  background: rgba(0, 191, 255, 0.09);
+  background: rgba(var(--cy-rgb), 0.09);
   box-shadow: inset 3px 0 0 0 var(--cy);
-  border-color: rgba(0, 191, 255, 0.20);
+  border-color: rgba(var(--cy-rgb), 0.22);
 }
 .gm-row.gm-row-queued .gm-text { color: var(--cy); }
 
 .gm-queue-btn.gm-queue-active {
   color: var(--cy);
-  filter: drop-shadow(0 0 6px rgba(0, 191, 255, 0.80));
+  filter: drop-shadow(0 0 6px rgba(var(--cy-rgb), 0.85));
 }
 
 .gm-push-btn {
-  border-color: rgba(0, 191, 255, 0.26);
-  color: rgba(0, 191, 255, 0.72);
-  background: rgba(0, 191, 255, 0.05);
+  border-color: rgba(var(--cy-rgb), 0.26);
+  color: rgba(var(--cy-rgb), 0.72);
+  background: rgba(var(--cy-rgb), 0.05);
 }
 .gm-push-btn:hover {
   color: var(--cy);
-  border-color: rgba(0, 191, 255, 0.52);
+  border-color: rgba(var(--cy-rgb), 0.52);
   border-style: solid;
-  box-shadow: 0 0 22px rgba(0, 191, 255, 0.14);
+  box-shadow: 0 0 24px rgba(var(--cy-rgb), 0.16);
 }
 
-/* ── Goal ticker ───────────────────────────────────────────────── */
+/* ── 14. GOAL TICKER ──────────────────────────────────────────── */
 .goal-ticker {
-  border-color: rgba(0, 191, 255, 0.18);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 0 32px rgba(0, 191, 255, 0.07);
+  border-color: rgba(var(--cy-rgb), 0.18);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.04),
+    0 0 36px rgba(var(--cy-rgb), 0.09);
 }
 .goal-ticker-led-dot {
   background: var(--cy);
-  box-shadow: 0 0 14px rgba(0, 191, 255, 0.95);
+  box-shadow: 0 0 16px rgba(var(--cy-rgb), 1.00);
+  animation: cy-flicker 2.2s ease-in-out infinite;
 }
 
-/* ── Stack items ───────────────────────────────────────────────── */
-.stack-item { background: rgba(0, 5, 18, 0.52); border-radius: 14px; }
-.stack-item.taken { background: rgba(0, 191, 255, 0.055); }
+/* ── 15. STACK ITEMS ──────────────────────────────────────────── */
+.stack-item { background: rgba(0, 2, 14, 0.52); border-radius: 14px; }
+.stack-item.taken { background: rgba(var(--cy-rgb), 0.055); }
 .stack-low-btn.is-low {
   border-color: var(--cy);
   color: var(--cy);
-  box-shadow: 0 0 12px rgba(0, 191, 255, 0.22);
+  box-shadow: 0 0 14px rgba(var(--cy-rgb), 0.24);
 }
 
-/* ── Reps / segment pills ──────────────────────────────────────── */
+/* ── 16. PILLS / SEGMENTS ─────────────────────────────────────── */
 .po-reps-pill.active, .po-modal-seg button.active, .po-seg-btn.active {
   background: linear-gradient(135deg, var(--cy-2), var(--cy));
   color: #000;
-  box-shadow: 0 0 18px rgba(0, 191, 255, 0.50);
+  box-shadow: 0 0 20px rgba(var(--cy-rgb), 0.55);
   border-color: transparent;
 }
 .po-seg-control, .po-modal-seg {
-  background: rgba(0, 5, 18, 0.62);
-  border: 1px solid rgba(0, 191, 255, 0.12);
+  background: rgba(0, 2, 14, 0.62);
+  border: 1px solid rgba(var(--cy-rgb), 0.12);
 }
 
-/* ── Sparklines / charts ───────────────────────────────────────── */
+/* ── 17. SPARKLINES / CHARTS ──────────────────────────────────── */
 .po-spark-line       { stroke: var(--cy); }
 .wt-line             { stroke: var(--cy); }
 .wt-dot              { fill: var(--cy); }
 .wt-dot-today        { fill: #fff; stroke: var(--cy); }
-.wt-avg-line         { stroke: rgba(0, 191, 255, 0.45); }
+.wt-avg-line         { stroke: rgba(var(--cy-rgb), 0.45); }
 .wt-legend-dot       { background: var(--cy); }
 .nw-chart-svg        { color: var(--cy); }
-.nw-activity-bar     { color: var(--cy); box-shadow: 0 0 6px var(--cy); }
+.nw-activity-bar     { color: var(--cy); box-shadow: 0 0 8px var(--cy); }
 .nw-donut-stage::after {
   background: radial-gradient(circle at center,
-    rgba(0,191,255,0.20) 0%, rgba(0,191,255,0.07) 40%, transparent 70%);
+    rgba(var(--cy-rgb), 0.22) 0%, rgba(var(--cy-rgb), 0.08) 40%, transparent 70%);
 }
-.day-ring-fill-glow { opacity: 0.32; }
+.day-ring-fill-glow { opacity: 0.35; }
 
-/* ── Today's workout rows ──────────────────────────────────────── */
-.po-tw-row { background: rgba(0,5,18,.50); border-color: rgba(0,191,255,.08); border-radius: 12px; }
+/* ── 18. TODAY'S WORKOUT ROWS ─────────────────────────────────── */
+.po-tw-row { background: rgba(0,2,14,.50); border-color: rgba(var(--cy-rgb),.08); border-radius: 12px; }
 .po-tw-row:hover,
-.po-tw-set-row:hover { background: rgba(0,191,255,0.055); border-color: rgba(0,191,255,.20); }
-.po-hist-row { border-bottom-color: rgba(0,191,255,0.10); }
+.po-tw-set-row:hover { background: rgba(var(--cy-rgb),0.055); border-color: rgba(var(--cy-rgb),.20); }
+.po-hist-row { border-bottom-color: rgba(var(--cy-rgb),0.10); }
 
-/* ── Prescription card ─────────────────────────────────────────── */
+/* ── 19. PRESCRIPTION CARD ────────────────────────────────────── */
 .po-rx-card.po-rx-up {
-  background: linear-gradient(180deg, rgba(0,191,255,0.07), var(--cy-bg-card));
-  border-color: rgba(0, 191, 255, 0.22);
+  background: linear-gradient(180deg, rgba(var(--cy-rgb),0.08), var(--cy-bg-card));
+  border-color: rgba(var(--cy-rgb), 0.24);
 }
-.po-rx-tag.up   { background: rgba(0,191,255,0.14); color: var(--cy); }
+.po-rx-tag.up   { background: rgba(var(--cy-rgb),0.14); color: var(--cy); }
 .po-rx-tag.hold { background: rgba(251,191,36,0.14); }
 
-/* ── Weight tracker ─────────────────────────────────────────────── */
-.wt-locked { background: rgba(0,191,255,0.045); border-color: rgba(0,191,255,0.20); }
-.wt-locked-check { color: var(--cy); }
-.wt-edit-btn     { color: var(--cy); }
-.wt-progress-link { border-color: rgba(0,191,255,0.12); }
-.wt-progress-link:hover { border-color: rgba(0,191,255,0.30); }
+/* ── 20. WEIGHT TRACKER ───────────────────────────────────────── */
+.wt-locked { background: rgba(var(--cy-rgb),0.045); border-color: rgba(var(--cy-rgb),0.20); }
+.wt-locked-check  { color: var(--cy); }
+.wt-edit-btn      { color: var(--cy); }
+.wt-progress-link { border-color: rgba(var(--cy-rgb),0.12); }
+.wt-progress-link:hover { border-color: rgba(var(--cy-rgb),0.32); }
 .wt-progress-arrow { color: var(--cy); }
-.wt-streak { color: var(--cy); }
+.wt-streak         { color: var(--cy); }
 
-/* ── Finance ───────────────────────────────────────────────────── */
+/* ── 21. FINANCE ──────────────────────────────────────────────── */
 .finance-ticker {
-  background: linear-gradient(90deg, rgba(0,191,255,0.07), rgba(0,80,160,0.05));
-  border: 1px solid rgba(0,191,255,0.15);
+  background: linear-gradient(90deg, rgba(var(--cy-rgb),0.07), rgba(var(--cy-rgb),0.03));
+  border: 1px solid rgba(var(--cy-rgb),0.16);
+  box-shadow: 0 0 24px rgba(var(--cy-rgb),0.06);
 }
-.ticker-tag { background: rgba(0,191,255,0.12); color: var(--cy); }
-.ticker-dot.active { background: var(--cy); }
+.ticker-tag { background: rgba(var(--cy-rgb),0.12); color: var(--cy); }
+.ticker-dot.active { background: var(--cy); box-shadow: 0 0 8px rgba(var(--cy-rgb),0.80); }
 
 .bot-tab.active {
   color: var(--cy);
-  background: rgba(0,191,255,0.09);
-  border-color: rgba(0,191,255,0.28);
+  background: rgba(var(--cy-rgb),0.09);
+  border-color: rgba(var(--cy-rgb),0.28);
 }
 
-.ord-card { background: rgba(0,5,18,0.58); border-radius: 16px; }
+.ord-card { background: rgba(0,2,14,0.58); border-radius: 16px; }
 .ord-card.cat-bank   { border-left-color: var(--cy); }
 .ord-card.cat-stocks { border-left-color: #00E5FF; }
 .ord-card.cat-crypto { border-left-color: #FFD700; }
 
 .ord-empty-card, .wish-empty-card {
-  background: rgba(0,5,18,0.52);
-  border-color: rgba(0,191,255,0.10);
+  background: rgba(0,2,14,0.52);
+  border-color: rgba(var(--cy-rgb),0.10);
 }
-.nw-activity-row { background: rgba(0,5,18,0.42); border-radius: 10px; }
-.nw-activity-row:hover { background: rgba(0,191,255,0.055); }
+.nw-activity-row { background: rgba(0,2,14,0.42); border-radius: 10px; }
+.nw-activity-row:hover { background: rgba(var(--cy-rgb),0.055); }
 
 .ord-deduct-btn {
-  background: rgba(0,191,255,0.12);
-  border-color: rgba(0,191,255,0.32);
+  background: rgba(var(--cy-rgb),0.12);
+  border-color: rgba(var(--cy-rgb),0.32);
   color: var(--cy);
 }
 
-/* ── Modals ────────────────────────────────────────────────────── */
+/* ── 22. MODALS ───────────────────────────────────────────────── */
 .po-modal {
-  background: rgba(2, 6, 22, 0.97);
-  border: 1px solid rgba(0,191,255,0.24);
-  box-shadow: 0 0 65px rgba(0,191,255,0.18), 0 32px 85px rgba(0,0,0,0.88);
+  background: rgba(2, 4, 20, 0.97);
+  border: 1px solid rgba(var(--cy-rgb),0.26);
+  box-shadow:
+    0 0 70px rgba(var(--cy-rgb),0.20),
+    0 0 140px rgba(var(--cy-rgb),0.06),
+    0 32px 85px rgba(0,0,0,0.92);
   border-radius: 22px;
   backdrop-filter: blur(32px);
 }
 .po-modal h3 { color: var(--cy); }
 
 .modal {
-  background: rgba(2, 6, 22, 0.97);
-  border: 1px solid rgba(0,191,255,0.22);
+  background: rgba(2, 4, 20, 0.97);
+  border: 1px solid rgba(var(--cy-rgb),0.24);
   border-radius: 22px;
   backdrop-filter: blur(32px);
-  box-shadow: 0 0 55px rgba(0,191,255,0.15), 0 32px 85px rgba(0,0,0,0.88);
+  box-shadow:
+    0 0 60px rgba(var(--cy-rgb),0.16),
+    0 0 120px rgba(var(--cy-rgb),0.05),
+    0 32px 85px rgba(0,0,0,0.92);
 }
 .modal h3 { color: var(--cy); }
 
-/* ── Tab bar (gym / water) ─────────────────────────────────────── */
+/* ── 23. TAB BAR ──────────────────────────────────────────────── */
 .tabbar-inner {
-  background: rgba(2, 6, 22, 0.84);
-  border-color: rgba(0,191,255,0.16);
+  background: rgba(2, 4, 20, 0.88);
+  border-color: rgba(var(--cy-rgb),0.16);
+  backdrop-filter: blur(20px);
 }
 .tab[aria-current="page"] {
   color: var(--cy);
-  background: rgba(0,191,255,0.09);
-  border-color: rgba(0,191,255,0.24);
+  background: rgba(var(--cy-rgb),0.09);
+  border-color: rgba(var(--cy-rgb),0.26);
+  box-shadow: 0 0 16px rgba(var(--cy-rgb),0.16);
 }
 
-/* ── Misc ──────────────────────────────────────────────────────── */
-.po-no-ex { border-color: rgba(0,191,255,0.14); background: rgba(0,5,18,0.52); }
-.po-bw-banner { background: rgba(0,191,255,0.08); border-color: rgba(0,191,255,0.22); color: var(--cy); }
-.po-delete-link { color: rgba(255,80,80,0.88); }
-.wt-empty { border-color: rgba(0,191,255,0.12); }
-.empty-state { color: rgba(0,191,255,0.52); }
+/* ── 24. MISC ─────────────────────────────────────────────────── */
+.po-no-ex   { border-color: rgba(var(--cy-rgb),0.14); background: rgba(0,2,14,0.52); }
+.po-bw-banner { background: rgba(var(--cy-rgb),0.08); border-color: rgba(var(--cy-rgb),0.24); color: var(--cy); }
+.po-delete-link { color: rgba(255,80,80,0.90); }
+.wt-empty   { border-color: rgba(var(--cy-rgb),0.12); }
+.empty-state { color: rgba(var(--cy-rgb), 0.52); }
 
-::selection { background: rgba(0,191,255,0.26); }
-::-webkit-scrollbar-thumb { background: rgba(0,191,255,0.24) !important; }
-::-webkit-scrollbar-thumb:hover { background: rgba(0,191,255,0.42) !important; }
+::selection { background: rgba(var(--cy-rgb), 0.28); }
+::-webkit-scrollbar-thumb { background: rgba(var(--cy-rgb), 0.26) !important; border-radius: 4px !important; }
+::-webkit-scrollbar-thumb:hover { background: rgba(var(--cy-rgb), 0.46) !important; }
+::-webkit-scrollbar-track { background: rgba(0,0,0,0.20) !important; }
 
-/* ── Topbar — needs !important (injected by topbar.js after load) ── */
+/* ── 25. TOPBAR — !important (injected by topbar.js) ─────────── */
 .topbar {
-  background: rgba(2, 5, 18, 0.97) !important;
-  border-bottom: 1px solid rgba(0, 191, 255, 0.20) !important;
-  backdrop-filter: blur(26px) !important;
-  -webkit-backdrop-filter: blur(26px) !important;
+  background: rgba(2, 4, 20, 0.97) !important;
+  border-bottom: 1px solid rgba(var(--cy-rgb), 0.20) !important;
+  backdrop-filter: blur(28px) saturate(1.5) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.5) !important;
+  box-shadow: 0 1px 0 rgba(var(--cy-rgb), 0.10), 0 4px 24px rgba(0,0,0,0.60) !important;
 }
 
 .topbar-pill {
-  background: rgba(0, 191, 255, 0.05) !important;
-  border: 1px solid rgba(0, 191, 255, 0.13) !important;
+  background: rgba(var(--cy-rgb), 0.05) !important;
+  border: 1px solid rgba(var(--cy-rgb), 0.13) !important;
   color: rgba(255,255,255,0.78) !important;
+  font-family: var(--font) !important;
   transition: background .18s, border-color .18s, box-shadow .18s !important;
 }
 .topbar-pill:hover {
-  background: rgba(0, 191, 255, 0.11) !important;
-  border-color: rgba(0, 191, 255, 0.30) !important;
+  background: rgba(var(--cy-rgb), 0.11) !important;
+  border-color: rgba(var(--cy-rgb), 0.30) !important;
+  box-shadow: 0 0 16px rgba(var(--cy-rgb), 0.14) !important;
 }
 
-/* Active page pill */
 .topbar-pill.topbar-active,
 .topbar-water-pill.topbar-active {
-  background: rgba(0, 191, 255, 0.16) !important;
-  border-color: rgba(0, 191, 255, 0.46) !important;
-  box-shadow: 0 0 22px rgba(0, 191, 255, 0.22) !important;
+  background: rgba(var(--cy-rgb), 0.16) !important;
+  border-color: rgba(var(--cy-rgb), 0.46) !important;
+  box-shadow:
+    0 0 22px rgba(var(--cy-rgb), 0.24),
+    0 0 44px rgba(var(--cy-rgb), 0.08) !important;
   animation: cy-glow-pulse 2.5s ease-in-out infinite !important;
 }
 .topbar-pill.topbar-active .topbar-pill-label,
@@ -487,37 +682,48 @@ select, .ord-input-ccy, .ord-input-from, .wish-input-ccy,
 
 .topbar-pill-dot {
   background: var(--cy) !important;
-  box-shadow: 0 0 10px rgba(0, 191, 255, 0.82) !important;
+  box-shadow: 0 0 12px rgba(var(--cy-rgb), 0.90) !important;
 }
 .topbar-pill-label {
   color: rgba(255,255,255,0.52) !important;
   letter-spacing: 0.16em !important;
   font-size: 10px !important;
+  font-family: var(--font-mono) !important;
 }
-.topbar-pill-count { color: #fff !important; }
+.topbar-pill-count { color: #fff !important; font-family: var(--font-mono) !important; }
 
 .topbar-water-pill {
-  background: rgba(0, 191, 255, 0.08) !important;
-  border: 1px solid rgba(0, 191, 255, 0.20) !important;
+  background: rgba(var(--cy-rgb), 0.08) !important;
+  border: 1px solid rgba(var(--cy-rgb), 0.20) !important;
 }
-.topbar-water-pill:hover { background: rgba(0,191,255,0.14) !important; }
+.topbar-water-pill:hover { background: rgba(var(--cy-rgb), 0.14) !important; }
 .topbar-water-pill .topbar-pill-dot {
   background: var(--cy) !important;
-  box-shadow: 0 0 10px rgba(0,191,255,0.82) !important;
+  box-shadow: 0 0 12px rgba(var(--cy-rgb), 0.88) !important;
 }
 
 .topbar-water-add {
-  background: linear-gradient(135deg, rgba(0,100,180,0.60), rgba(0,191,255,0.60)) !important;
-  border: 1px solid rgba(0,191,255,0.38) !important;
-  box-shadow: 0 0 14px rgba(0,191,255,0.25) !important;
+  background: linear-gradient(135deg, rgba(var(--cy-rgb), 0.45), rgba(var(--cy-rgb), 0.65)) !important;
+  border: 1px solid rgba(var(--cy-rgb), 0.40) !important;
+  box-shadow: 0 0 16px rgba(var(--cy-rgb), 0.28) !important;
 }
 .topbar-water-add:hover {
-  background: linear-gradient(135deg, rgba(0,120,200,0.80), rgba(0,191,255,0.80)) !important;
-  box-shadow: 0 0 22px rgba(0,191,255,0.45) !important;
+  background: linear-gradient(135deg, rgba(var(--cy-rgb), 0.65), rgba(var(--cy-rgb), 0.85)) !important;
+  box-shadow: 0 0 28px rgba(var(--cy-rgb), 0.50) !important;
 }
 
-/* Mobile: disable translateY hover (prevents layout jump on touch) */
+/* ── 26. MOBILE — disable translateY hover ────────────────────── */
 @media (max-width: 480px) {
   .gm-card:hover, .card:hover, .stack-card:hover,
-  .wt-card:hover, .po-stat-box:hover { transform: none; }
+  .wt-card:hover, .po-stat-box:hover,
+  .day-ring-wrap:hover { transform: none; }
+
+  .gm-card:hover, .card:hover, .stack-card:hover,
+  .wt-card:hover, .po-stat-box:hover {
+    box-shadow:
+      var(--cy-inset-h),
+      0 0 0 1px rgba(255,255,255,0.06) inset,
+      0 16px 48px rgba(0,0,0,0.85),
+      0 0 36px rgba(var(--cy-rgb),0.14);
+  }
 }
