@@ -411,6 +411,19 @@ body.topbar-modal-open {
   // -------- Boot --------
   function boot() {
     injectStyleAndHTML();
+    // Mark the pill for the current page as active (styled by cyberpunk.css)
+    (function () {
+      const fn = window.location.pathname.split('/').pop() || 'index.html';
+      const map = {
+        'index.html':    'topbarGoals',
+        'health.html':   'topbarStack',
+        'po-water.html': 'topbarWater',
+        'gym.html':      'topbarGym',
+        'finance.html':  'topbarFinance',
+      };
+      const el = document.getElementById(map[fn] || 'topbarGoals');
+      if (el) el.classList.add('topbar-active');
+    })();
     const btn = document.getElementById('topbarWaterAdd');
     if (btn) btn.addEventListener('click', (e) => { e.preventDefault(); addWater(); });
     render();
